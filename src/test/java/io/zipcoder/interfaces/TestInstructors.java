@@ -37,5 +37,4 @@ public class TestInstructors {
         // Then
         Assert.assertTrue(expectedTrue);
     }
-
 }
