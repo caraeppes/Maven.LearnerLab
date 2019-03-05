@@ -3,6 +3,9 @@ package io.zipcoder.interfaces;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TestInstructors {
 
     @Test
@@ -17,7 +20,7 @@ public class TestInstructors {
         Instructor nhu = new Instructor(4);
         nhu.setName("Nhu");
 
-        People expected = new People();
+        List<Instructor> expected = new ArrayList<>();
         expected.add(leon);
         expected.add(froilan);
         expected.add(wil);
@@ -28,8 +31,8 @@ public class TestInstructors {
         boolean expectedTrue = true;
 
         for(int i = 0; i < actual.getCount(); i++){
-            if(!((expected.getPersonList().get(i).getId() == (actual.getPersonList().get(i).getId())) ||
-                    (expected.getPersonList().get(i).getName().equals(actual.getPersonList().get(i).getName())))){
+            if(!((expected.get(i).getId() == (actual.getArray()[i].getId())) ||
+                    (expected.get(i).getName().equals(actual.getArray()[i].getName())))){
                 expectedTrue = false;
             }
         }

@@ -1,6 +1,8 @@
 package io.zipcoder.interfaces;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -8,86 +10,88 @@ import java.util.List;
 
 public class TestPeople {
 
-    @Test
-    public void testAdd(){
-        // Given
-        People people = new People();
-        Person person1 = new Person(1);
-        Person person2 = new Person(2);
+    Student brian;
 
-        List<Person> expected = new ArrayList<>();
-        expected.add(person1);
-        expected.add(person2);
+    @Before
+    public void setUp() {
+        brian = new Student(5);
+        brian.setName("Brian");
+    }
+
+    @Test
+    public void testAdd() {
+        // Given
+        List<Student> expected = new ArrayList<>();
+        Students people = Students.getInstance();
+        for(Student student : people.getPersonList()){
+            expected.add(student);
+        }
+        expected.add(brian);
 
         // When
-        people.add(person1);
-        people.add(person2);
-        List<Person> actual = people.getPersonList();
+        people.add(brian);
+        List<Student> actual = people.getPersonList();
 
         // Then
         Assert.assertEquals(expected, actual);
+        people.remove(brian);
+
+    }
+
+    @Test
+    public void testRemoveByPerson() {
+        // Given
+        List<Student> expected = new ArrayList<>();
+        Students people = Students.getInstance();
+        for(Student student : people.getPersonList()){
+            expected.add(student);
+        }
+        Student mike = expected.get(3);
+        expected.remove(mike);
+
+        // When
+        people.remove(mike);
+        List<Student> actual = people.getPersonList();
+
+        //Then
+        Assert.assertEquals(expected, actual);
+        people.add(mike);
     }
 
 
     @Test
-    public void testRemoveByPerson(){
+    public void testRemoveById() {
         // Given
-        People people = new People();
-        Person person1 = new Person(1);
-        Person person2 = new Person(2);
-
-        List<Person> expected = new ArrayList<>();
-
-        people.add(person1);
-        people.add(person2);
+        List<Student> expected = new ArrayList<>();
+        Students people = Students.getInstance();
+        for(Student student : people.getPersonList()){
+            expected.add(student);
+        }
+        Student mike = expected.get(3);
+        expected.remove(mike);
 
         // When
-        people.remove(person1);
-        people.remove(person2);
+        people.remove(4);
+        List<Student> actual = people.getPersonList();
 
-        List<Person> actual = people.getPersonList();
-
-        // Then
+        //Then
         Assert.assertEquals(expected, actual);
+        people.add(mike);
     }
 
 
     @Test
-    public void testRemoveById(){
+    public void testFindById() {
         // Given
-        People people = new People();
-        Person person1 = new Person(1);
-        Person person2 = new Person(2);
-
-        List<Person> expected = new ArrayList<>();
-
-        people.add(person1);
-        people.add(person2);
+        Instructors people = Instructors.getInstance();
+        Person expected = people.getPersonList().get(2);
 
         // When
-        people.remove(1);
-        people.remove(2);
-
-        List<Person> actual = people.getPersonList();
+        Person actual = people.findById(3);
 
         // Then
         Assert.assertEquals(expected, actual);
-    }
 
-
-    @Test
-    public void testFindById(){
-        // Given
-        People people = new People();
-        Person expected = new Person(1);
-
-        people.add(expected);
-
-        // When
-        Person actual = people.findById(1);
-
-        // Then
-        Assert.assertEquals(expected, actual);
     }
 
 }

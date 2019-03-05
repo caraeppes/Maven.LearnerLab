@@ -11,7 +11,7 @@ public class TestZipCodeWilmington {
         ZipCodeWilmington zcw = ZipCodeWilmington.getInstance();
 
         Students expected = Students.getInstance();
-        for (Student student : expected.getStudentArray()) {
+        for (Student student : expected.getArray()) {
             student.learn(5);
         }
 
@@ -31,7 +31,7 @@ public class TestZipCodeWilmington {
         // Given
         ZipCodeWilmington zcw = ZipCodeWilmington.getInstance();
         Students expected = Students.getInstance();
-        for (Student student : expected.getStudentArray()) {
+        for (Student student : expected.getArray()) {
             student.learn(5);
         }
 
@@ -41,6 +41,25 @@ public class TestZipCodeWilmington {
 
         // Then
         Assert.assertEquals(expected, actual);
+    }
+
+
+    @Test
+    public void testHostLectureWithEducator(){
+        // Given
+        ZipCodeWilmington zcw = ZipCodeWilmington.getInstance();
+        Students expected = Students.getInstance();
+        for (Student student : expected.getArray()) {
+            student.learn(5);
+        }
+
+        // When
+        zcw.hostLecture(Educator.FROILAN, 20);
+        Students actual = zcw.getStudents();
+
+        // Then
+        Assert.assertEquals(expected, actual);
+
     }
 
 }

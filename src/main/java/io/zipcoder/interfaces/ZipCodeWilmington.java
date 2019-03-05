@@ -10,13 +10,17 @@ public class ZipCodeWilmington {
 
 
     public void hostLecture(Teacher teacher, double numberOfHours){
-        teacher.lecture(students.getStudentArray(), numberOfHours);
+        teacher.lecture(students.getArray(), numberOfHours);
     }
 
 
     public void hostLecture(long id, double numberOfHours){
-        Teacher teacher = (Teacher)instructors.findById(id);
+        Teacher teacher = instructors.findById(id);
         hostLecture(teacher, numberOfHours);
+    }
+
+    public void hostLecture(Educator educator, double numberOfHours){
+        educator.lecture(students.getArray(), numberOfHours);
     }
 
     public static ZipCodeWilmington getInstance(){
@@ -25,9 +29,5 @@ public class ZipCodeWilmington {
 
     public Students getStudents() {
         return students;
-    }
-
-    public Instructors getInstructors() {
-        return instructors;
     }
 }
